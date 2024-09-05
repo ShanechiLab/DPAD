@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "purpose": ["debug-test"],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "TF_CPP_MIN_LOG_LEVEL": "1",
+                "PYDEVD_WARN_SLOW_RESOLVE_TIMEOUT": "5",
+            },
+            "justMyCode": false
+        }
+    ]
+}

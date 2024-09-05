@@ -1,0 +1,36 @@
+{
+    "python.analysis.extraPaths": ["./source"],
+    "python.terminal.activateEnvironment": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+         },
+         "editor.tabSize": 4
+    },
+    "isort.args":["--profile", "black"],
+    "python.linting.pylintPath": "${workspaceFolder}\\.venv\\Scripts\\pylint.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./source",
+        "-p",
+        "test*.py"
+    ],
+    "python.testing.pytestArgs": [
+        "source"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUnboundVariable": "warning",
+        "reportGeneralTypeIssues": "warning",
+        "reportOptionalMemberAccess": "warning",
+        "reportOptionalSubscript": "warning",
+        "reportOptionalIterable": "warning"
+    }
+}

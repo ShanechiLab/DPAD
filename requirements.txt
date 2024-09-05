@@ -1,0 +1,7 @@
+# python version: 3.11.9
+tensorflow==2.15.1
+numpy==1.26.4
+PSID==1.2.2 # PSID library for comprisons
+coloredlogs==15.0.1 # For printing logs in color onto the terminal
+tqdm==4.66.4
+xxhash==3.5.0

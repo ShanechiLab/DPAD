@@ -1,0 +1,4 @@
+# Additional requirements for development or for running the notebook
+sympy==1.13.2 # For notebook
+ipython # For notebook
+ipykernel # For notebook
