@@ -21,6 +21,8 @@ The following documents explain the formulation of the key classes that are used
 
 -  [source/DPAD/RegressionModelDoc.md](./source/DPAD/RegressionModelDoc.md): The formulation implemented by the `RegressionModel` class, which `RNNModel` and `DPADModel` both internally use to build the general multilayer feed-forward neural networks that are used to implement each model parameter. 
 
+We are working on various improvements to the DPAD codebase. Stay tuned!
+
 # License
 Copyright (c) 2024 University of Southern California  
 See full notice in [LICENSE.md](./LICENSE.md)  
