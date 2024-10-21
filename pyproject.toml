@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "DPAD"
-version = "0.0.3"
+version = "0.0.7"
 authors = [
     {name = "Omid Sani", email = "omidsani@gmail.com"},
 ]
@@ -15,12 +15,12 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "tensorflow",
-    "numpy",
-    "PSID",
-    "coloredlogs",
-    "tqdm",
-    "xxhash"
+    "tensorflow==2.15.1",
+    "numpy==1.26.4",
+    "PSID==1.2.5",
+    "coloredlogs==15.0.1",
+    "tqdm==4.66.4",
+    "xxhash==3.5.0"
 ]
 dynamic = ["readme"]
 

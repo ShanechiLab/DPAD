@@ -18,7 +18,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 import numpy as np
-from DPAD.DPADModel import DPADModel, DPADModelPrepareArgs, shift_ms_to_1s_series
+
+from DPAD.DPADModel import DPADModel, shift_ms_to_1s_series
 from DPAD.sim import (
     generateRandomLinearModel,
     genRandomGaussianNoise,
@@ -1658,7 +1659,7 @@ class TestDPAD(unittest.TestCase):
                     Z = np.sin(X)
 
                     s2 = DPADModel(**DPADModelArgs)
-                    args = DPADModelPrepareArgs("DPAD_disU_Cz1HL64U_n1_256")
+                    args = DPADModel.prepare_args("DPAD_disU_Cz1HL64U_n1_256")
                     if ci % 3 == 0:  # Also provide validation data
                         args.update(
                             {

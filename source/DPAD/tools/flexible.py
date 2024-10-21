@@ -126,9 +126,9 @@ def fitDPADWithFlexibleNonlinearity(
 
     if addMethodCodeToSavePath:
         saveDir = os.path.join(saveDir, methodCode)
-        
+
     if saveFName is None:
-        saveFName = '' if addMethodCodeToSavePath else methodCode
+        saveFName = "" if addMethodCodeToSavePath else methodCode
 
     if not saveFName.endswith(".p"):
         saveFName += ".p"
@@ -221,13 +221,13 @@ def pickMethodHyperParamsWithInnerCV(
             yDefaultPerfMeasure if prioritizeZPred else zDefaultPerfMeasure
         )  # Among those with 1 sem of iCVSelPerfMeasure, pick one that is within 1sem of the best iCVSelPerfMeasure2
     if "iCVSelIn1SEM" not in settings:
-        settings[
-            "iCVSelIn1SEM"
-        ] = True  # If true, will select the smallest nx (or the best iCVSelPerfMeasure2) that reaches within 1 sem of the best innerCV iCVSelPerfMeasure
+        settings["iCVSelIn1SEM"] = (
+            True  # If true, will select the smallest nx (or the best iCVSelPerfMeasure2) that reaches within 1 sem of the best innerCV iCVSelPerfMeasure
+        )
     if "iCVSelIn1SEM2" not in settings:
-        settings[
-            "iCVSelIn1SEM2"
-        ] = False  # If true, will select the smallest nx that reaches within 1 sem of the best innerCV iCVSelPerfMeasure2, among those that satisfy sem conditions for iCVSelPerfMeasure
+        settings["iCVSelIn1SEM2"] = (
+            False  # If true, will select the smallest nx that reaches within 1 sem of the best innerCV iCVSelPerfMeasure2, among those that satisfy sem conditions for iCVSelPerfMeasure
+        )
     if "iCVFolds" not in settings:
         CVFolds = settings["CVFolds"] if "CVFolds" in settings else 5
         settings["iCVFolds"] = np.max((2, CVFolds - 1))
@@ -515,9 +515,9 @@ def doCVedModelFit(
         settings["useXFilt"] = False
 
     if "PSIDKKF_missingZStrategy" not in settings:
-        settings[
-            "PSIDKKF_missingZStrategy"
-        ] = "interpolate"  # Can be 'interpolate' or 'discard'
+        settings["PSIDKKF_missingZStrategy"] = (
+            "interpolate"  # Can be 'interpolate' or 'discard'
+        )
 
     if "horizon" not in settings:
         settings["horizon"] = [10]
@@ -527,9 +527,9 @@ def doCVedModelFit(
         settings["foldsToRun"] = []  # If empty will run all
 
     if "foldsToConsider" not in settings:
-        settings[
-            "foldsToConsider"
-        ] = None  # If None will keep all folds. If a list, will exclude other folds after dividing data up ino folds
+        settings["foldsToConsider"] = (
+            None  # If None will keep all folds. If a list, will exclude other folds after dividing data up ino folds
+        )
 
     if "iCVFoldsToConsider" not in settings:
         settings["iCVFoldsToConsider"] = None
@@ -1532,9 +1532,9 @@ def doCVedModelingForGivenFolds(
     CVFitRes["perfAllFCat"] = perfAllFCat
 
     if settings["savePreds"]:
-        CVFitRes[
-            "zPredAllUnit"
-        ] = "z"  # Any zscoring is undone so that zPredAll is in the same unit as z
+        CVFitRes["zPredAllUnit"] = (
+            "z"  # Any zscoring is undone so that zPredAll is in the same unit as z
+        )
         if settings["doNotSaveMissing"] is False:
             CVFitRes["zPredAll"] = zPredAll
             CVFitRes["z"] = {"data": Z, "time": T}
@@ -2890,7 +2890,7 @@ def doModelFit(
         if methodSettings.posthocMap is not None:
             methodCode = methodSettings.methodCodeBase
 
-        args = DPADModel.DPADModelPrepareArgs(methodCode)
+        args = DPADModel.prepare_args(methodCode)
         if (
             "HL" in methodCode
             or "LSTM" in methodCode
@@ -2925,7 +2925,7 @@ def doModelFit(
 
         if not methodSettings.finetune:
             logger.info(f"DPAD.fit args: {args}")
-            sId = DPADModel.DPADModel(log_dir=log_dir, missing_marker=missing_marker)
+            sId = DPADModel(log_dir=log_dir, missing_marker=missing_marker)
             sId.fit(
                 transposeIf(YTrainF),
                 transposeIf(ZTrainF),
@@ -2942,13 +2942,11 @@ def doModelFit(
             )
         else:
             sId = priorSId
-            if not isinstance(sId, DPADModel.DPADModel):
+            if not isinstance(sId, DPADModel):
                 logger.info(
                     f"Converting prior fully linear model into a DPAD object for finetuning"
                 )
-                sId = DPADModel.DPADModel(
-                    log_dir=log_dir, missing_marker=missing_marker
-                )
+                sId = DPADModel(log_dir=log_dir, missing_marker=missing_marker)
                 sId.fit(
                     transposeIf(YTrainF),
                     transposeIf(ZTrainF),
@@ -3093,23 +3091,17 @@ def doModelFit(
         ny = (
             YTrainF[0].shape[1]
             if isinstance(YTrainF, list)
-            else YTrainF.shape[1]
-            if YTrainF is not None
-            else 0
+            else YTrainF.shape[1] if YTrainF is not None else 0
         )
         nz = (
             ZTrainF[0].shape[1]
             if isinstance(ZTrainF, list)
-            else ZTrainF.shape[1]
-            if ZTrainF is not None
-            else 0
+            else ZTrainF.shape[1] if ZTrainF is not None else 0
         )
         nu = (
             UTrainF[0].shape[1]
             if isinstance(UTrainF, list)
-            else UTrainF.shape[1]
-            if UTrainF is not None
-            else 0
+            else UTrainF.shape[1] if UTrainF is not None else 0
         )
         sId = addScalingInfoToModelObject(
             sId,
@@ -3414,9 +3406,9 @@ def prepareTrainingAndTestData(
                 ZTest = ZTest_tmp
             else:
                 sharedInds = np.nonzero(np.isin(isTrain, isTest))[0]
-                ZTrain[
-                    sharedInds, :
-                ] = missing_marker  # void test Z with missing_marker
+                ZTrain[sharedInds, :] = (
+                    missing_marker  # void test Z with missing_marker
+                )
     else:
         ZTestSc = ZTest
         zMean, zStd = None, None
@@ -3728,7 +3720,7 @@ def loadAndParseFullCVedResults(
                     and np.isnan(p["meanyCC"])
                 ):
                     if (
-                        isinstance(idSys, (DPADModel.DPADModel))
+                        isinstance(idSys, (DPADModel))
                         and hasattr(idSys, "XCov")
                         and np.any(np.isnan(idSys.XCov))
                     ):
@@ -3973,14 +3965,14 @@ def parseLoadedCVResults(
                 for mi, methodCode in enumerate(methodCodes):
                     for nxi, nx in enumerate(nxVals):
                         idSys = idSysAll[mi][fi][nxi]
-                        CVFitRes["zPredAll"][mi][0][nxi][
-                            isTest[isTestNew], :
-                        ] = undoScaling(
-                            idSys,
-                            CVFitRes["zPredAll"][mi][0][nxi][isTest[isTestNew], :],
-                            "zMean",
-                            "zStd",
-                            missing_marker=missing_marker,
+                        CVFitRes["zPredAll"][mi][0][nxi][isTest[isTestNew], :] = (
+                            undoScaling(
+                                idSys,
+                                CVFitRes["zPredAll"][mi][0][nxi][isTest[isTestNew], :],
+                                "zMean",
+                                "zStd",
+                                missing_marker=missing_marker,
+                            )
                         )
             CVFitRes["zPredAllUnit"] = "z"
         if "chanSetId" in settings and "chanSetId" not in CVFitRes["extraSettings"]:
@@ -4295,7 +4287,7 @@ def prepareMethodSet(
                 newMethodCode = methodCodeBase.replace(paramStr, paramStrThis)
                 subMethods.append(newMethodCode)
     for mi, mCode in enumerate(subMethods):
-        args = DPADModel.DPADModelPrepareArgs(mCode)
+        args = DPADModel.prepare_args(mCode)
         if (
             "units" not in args["A_args"]
             or len(args["A_args"]["units"]) == 0
