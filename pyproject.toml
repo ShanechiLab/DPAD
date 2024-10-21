@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DPAD"
+version = "0.0.2"
+authors = [
+    {name = "Omid Sani", email = "omidsani@gmail.com"},
+]
+description = "Python implementation for DPAD (dissociative and prioritized analysis of dynamics)"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "tensorflow",
+    "numpy",
+    "PSID",
+    "coloredlogs",
+    "tqdm",
+    "xxhash"
+]
+dynamic = ["readme"]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[tool.setuptools.packages.find]
+where = ["source"]  # list of folders that contain the packages (["."] by default)
