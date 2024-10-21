@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "DPAD"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
     {name = "Omid Sani", email = "omidsani@gmail.com"},
 ]
@@ -23,6 +23,10 @@ dependencies = [
     "xxhash"
 ]
 dynamic = ["readme"]
+
+[project.urls]
+Homepage = "https://github.com/ShanechiLab/DPAD"
+Issues = "https://github.com/ShanechiLab/DPAD/issues"
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
