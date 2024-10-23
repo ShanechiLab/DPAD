@@ -504,7 +504,7 @@ class DPADModel(PredictorModel):
         allow_nonzero_Cz2 = "Cz20" not in methodCode
         has_Dyz = "Dyz" in methodCode
         skip_Cy = "skipCy" in methodCode
-        zscore_inputs = "zs" in methodCode
+        zscore_inputs = "nzs" not in methodCode
 
         kwargs = {
             "A1_args": A1_args,

@@ -23,6 +23,9 @@ The following documents explain the formulation of the key classes that are used
 
 We are working on various improvements to the DPAD codebase. Stay tuned!
 
+# Change Log
+You can see the change log in [ChangeLog.md](./ChangeLog.md)  
+
 # License
 Copyright (c) 2024 University of Southern California  
 See full notice in [LICENSE.md](./LICENSE.md)  
