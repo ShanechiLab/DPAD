@@ -449,9 +449,9 @@ class DPADModel(PredictorModel):
                 ErS_str = methodCode[match.span()[0] : match.span()[1]]
             early_stopping_patience = int(early_stopping_patience[0])
         else:
-            early_stopping_patience = 3
-            ErS_str = ""
-        early_stopping_measure = "val_loss" if "ErSV" in ErS_str else "loss"
+            early_stopping_patience = 16 # 16 is recommended for when early stopping is based on validation set. If based in train set, the recommended patience is 3.
+            ErS_str = "ErSV"
+        early_stopping_measure = "loss" if "ErSV" not in ErS_str else "val_loss"
 
         if "MinEp" in methodCode:  # Minimum epochs
             regex = r"MinEp(\d+)"  # MinEp150
@@ -836,8 +836,8 @@ class DPADModel(PredictorModel):
         init_attempts=1,  # Will retry with different (random) initializations at least this many times
         max_attempts=10,  # Max refit attempts in case a model leads to nan loss
         throw_on_fail=True,  # If true, will raise exception if learned RNN is unstable
-        early_stopping_patience=3,  # Will stop numerical optimization early any time this many epochs do not bring an improvement in the loss
-        early_stopping_measure="loss",  # The measure to use for early stopping
+        early_stopping_patience=16,  # Will stop numerical optimization early any time this many epochs do not bring an improvement in the loss
+        early_stopping_measure="val_loss",  # The measure to use for early stopping
         start_from_epoch_rnn=0,  # Minimum epochs to do before early stopping is considered for the rnn fitting (model1, model2) optimizations
         start_from_epoch_reg=0,  # Minimum epochs to do before early stopping is considered for the regression (model1_Cy, model2_Cz) fitting optimizations
         create_val_from_training=False,  # If True, will create the validation data by cutting it off of the training data

@@ -922,3 +922,18 @@ def autoDetectSignalType(Z):
     else:
         raise (Exception("Not supported"))
     return ZType
+
+def prepAxesStyle(ax, grid_on=True, box_on=True):
+    """Prepares the axes style by adding grids and removing spines
+
+    Args:
+        ax (_type_): _description_
+        grid_on (bool, optional): _description_. Defaults to True.
+        box_on (bool, optional): _description_. Defaults to True.
+    """    
+    if grid_on:
+        ax.grid(alpha=0.1)
+    if box_on:
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+    ax.tick_params(axis='both', direction='in', length=2)

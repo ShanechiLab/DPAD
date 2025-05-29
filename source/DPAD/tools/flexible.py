@@ -210,8 +210,8 @@ def pickMethodHyperParamsWithInnerCV(
         iCVRes (dict): inner cross-validation results
     """
     prioritizeZPred = "GSUTy" not in methodCode  # and 'GSUT' in methodCode and
-    zDefaultPerfMeasure = "meanAUC" if ZType == "cat" else "meanCC"
-    yDefaultPerfMeasure = "meanyCC"
+    zDefaultPerfMeasure = "meanAUC" if ZType == "cat" else "CC" #"meanCC"
+    yDefaultPerfMeasure = "yCC" #"meanyCC"
     if "iCVSelPerfMeasure" not in settings:
         settings["iCVSelPerfMeasure"] = (
             zDefaultPerfMeasure if prioritizeZPred else yDefaultPerfMeasure
@@ -354,7 +354,10 @@ def pickMethodHyperParamsWithInnerCV(
                 settings["iCVSelPerfMeasure"]
                 + " not available so using {iCVSelPerfMeasure} instead to pick hyperparameters"
             )
-        yValsF = np.vectorize(lambda a: a[iCVSelPerfMeasure])(perfAll)
+        if 'mean' not in iCVSelPerfMeasure:
+            yValsF = np.vectorize(lambda a: np.nanmean(a[iCVSelPerfMeasure]))(perfAll)
+        else:
+            yValsF = np.vectorize(lambda a: a[iCVSelPerfMeasure])(perfAll)
         if not settings["iCVSelIn1SEM"]:
             logger.info(
                 "- Preaveraging {} across the {} folds => sem will be 0 and will pick the case with best {}".format(
@@ -384,7 +387,10 @@ def pickMethodHyperParamsWithInnerCV(
             else:
                 iCVSelPerfMeasure2 = None
             if iCVSelPerfMeasure2 is not None:
-                yValsF2 = np.vectorize(lambda a: a[iCVSelPerfMeasure2])(perfAll)
+                if 'mean' not in iCVSelPerfMeasure2:
+                    yValsF2 = np.vectorize(lambda a: np.nanmean(a[iCVSelPerfMeasure2]))(perfAll)
+                else:
+                    yValsF2 = np.vectorize(lambda a: a[iCVSelPerfMeasure2])(perfAll)
                 if not settings["iCVSelIn1SEM2"]:
                     logger.info(
                         "- Preaveraging {} across the {} folds => sem will be 0 and will pick the case with best {}".format(
