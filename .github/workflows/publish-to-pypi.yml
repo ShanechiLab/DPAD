@@ -97,6 +97,7 @@ jobs:
     needs:
     - build
     runs-on: ubuntu-latest
+    if: false
 
     environment:
       name: testpypi
