@@ -7,10 +7,9 @@ Original preprint: https://doi.org/10.1101/2021.09.03.458628
 
 
 # Usage examples
-The following notebook contains usage examples of DPAD for several use-cases:
-[source/DPAD/example/DPAD_tutorial.ipynb](https://github.dev/ShanechiLab/DPAD/blob/main/source/DPAD/example/DPAD_tutorial.ipynb). 
-
-An HTML version of the notebook is also available next to it in the same directory.
+The following notebooks contains usage examples of DPAD for several use-cases:
+1. Simulation notebook: [source/DPAD/example/DPAD_tutorial.ipynb](https://github.dev/ShanechiLab/DPAD/blob/main/source/DPAD/example/DPAD_tutorial.ipynb). 
+2. Notebook with real neural-behavioral data: [source/DPAD/example/DPAD_tutorial2.ipynb](https://github.dev/ShanechiLab/DPAD/blob/main/source/DPAD/example/DPAD_tutorial2.ipynb). 
 
 # Usage examples
 The following documents explain the formulation of the key classes that are used to implement DPAD (the code for these key classes is also available in the same directory):
