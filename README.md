@@ -30,3 +30,7 @@ Copyright (c) 2024 University of Southern California
 See full notice in [LICENSE.md](./LICENSE.md)  
 Omid G. Sani and Maryam M. Shanechi  
 Shanechi Lab, University of Southern California  
+
+# Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=ShanechiLab/DPAD&type=Date)](https://star-history.com/#ShanechiLab/DPAD&Date)
+
